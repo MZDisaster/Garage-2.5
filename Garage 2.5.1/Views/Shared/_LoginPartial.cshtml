@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a class="btn btn-primary btn-lg" role="button" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-default" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-default" })</li>
+    </ul>
+}
+
+<script type="text/javascript">
+    $(function () {
+        console.log("window loaded");
+        $('#loginbutton').click(function () {
+            var loginwindow = window.open( "@Url.Action("Login")", "_blank", "height=500px,width=300px,menubar=0, resizble=0,status=0,toolbar=0", false);
+
+        });
+    });
+    var login = function () {
+        $.ajax({
+            url: "@Url.Action("LoginPost", "Index", null)",
+            type: "post"
+        }).done(function(data){
+            if (data.response == true) {
+                    window.location = "@Url.Action("Index", "Dashboard", null)";
+                } else {
+                    window.location = "@Url.Action("Register", "Index", null)";
+                }
+            });
+
+        }
+</script>
