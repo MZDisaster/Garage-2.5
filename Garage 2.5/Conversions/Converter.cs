@@ -54,8 +54,13 @@ namespace Garage_2._5.Conversions
         public Vehicle ConvertyToVehicleFromCreateModel (VehicleCreateViewModel CVCModel)
         {
             Vehicle VModel = new Vehicle();
-            Owner Owner = new Owner();
-            VehicleType VehicleType = new VehicleType();
+
+            VModel.Owner = CVCModel.Owner;
+            VModel.RegNr = CVCModel.RegNr;
+            VModel.PNR = CVCModel.Owner.PNR;
+            VModel.VehicleType = CVCModel.VehicleType;
+            VModel.TypeId = CVCModel.VehicleType.TypeId;
+            VModel.Color = CVCModel.Color;
 
             return VModel;
 
