@@ -12,7 +12,8 @@ namespace Garage_2._5.Repositories
     public class GarageRepo
     {
         public GarageContext GContext { get; set; }
-        public Converter Converter = new Converter();
+
+        protected Converter Converter = new Converter();
 
         public GarageRepo()
         {
@@ -53,7 +54,7 @@ namespace Garage_2._5.Repositories
             return VModelList;
         }
 
-        // not yet working
+        // should be working
         public void AddVehicle(VehicleCreateViewModel VCVModel)
         {
             GContext.Vehicles.Add(Converter.ConvertyToVehicleFromCreateModel(VCVModel));
