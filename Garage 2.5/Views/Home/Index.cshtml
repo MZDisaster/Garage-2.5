@@ -3,19 +3,24 @@
 @{
     ViewBag.Title = "Index";
 }
-
-@using (Ajax.BeginForm("Index", new AjaxOptions() { HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "OurTableDiv" })) { 
-@Html.DropDownList("VehicleTypeId")
-@Html.TextBox("RegNr")
-<input type="submit" value="Search" class="btn btn-default" />
+@using (Ajax.BeginForm("Index", new AjaxOptions
+                                {
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "OurTableDiv",
+                                    HttpMethod = "GET"
+                                }))
+{
+    @Html.DropDownList("VehicleTypeId")
+    @Html.TextBox("RegNr")
+    <button type="submit" class="btn btn-default">Search</button>
 }
 <div id="OurTableDiv">
-<h2>Index</h2>
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Detailed list", "DetailedList")
-    @Html.ActionLink("Create new Vehicle", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Detailed list", "DetailedList")
+        @Html.ActionLink("Create new Vehicle", "Create")
+    </p>
     <table class="table">
         <tr>
             <th>
