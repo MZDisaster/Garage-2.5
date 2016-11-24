@@ -29,7 +29,7 @@ namespace Garage_2._5.Repositories
 
         public IEnumerable<VehicleDetailsViewModel> GetVehiclesDetailsList()
         {
-            var VDModelList = GContext.Vehicles.Select(v => Converter.ConvertToVehicleDetailsModel(v));
+            List<VehicleDetailsViewModel> VDModelList = Converter.ConvertToVehicleDetailsModel(GContext.Vehicles.Select(v => v));
 
             return VDModelList;
         }
@@ -46,10 +46,10 @@ namespace Garage_2._5.Repositories
 
         public IEnumerable<VehicleDetailsViewModel> SearchInDetails(int Type, string RegNr)
         {
-            List<VehicleViewModel> VModelList = GContext.Vehicles.Where(v =>
+            List<VehicleDetailsViewModel> VModelList = Converter.ConvertToVehicleDetailsModel(GContext.Vehicles.Where(v =>
                 v.VehicleType.TypeId == Type &&
                 v.RegNr.Contains(RegNr)
-                ).Select(v => Converter.ConvertToVehicleDetailsModel(v));
+                ).Select(v => v));
 
             return VModelList;
         }
