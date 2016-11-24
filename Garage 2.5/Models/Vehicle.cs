@@ -12,7 +12,7 @@ namespace Garage_2._5.Models
         [Key]
         public int VehicleId { get; set; }
 
-        [RegularExpression("/^[A-Z]{3}[0-9]{3}/")]
+        [RegularExpression("^[A-Z]{3}[0-9]{3}$")]
         public string RegNr { get; set; }
 
         public string Color { get; set; }

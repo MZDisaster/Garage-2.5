@@ -7,10 +7,10 @@ using System.Web;
 
 namespace Garage_2._5.Conversions
 {
-    public class Converter
+    public static class Converter
     {
         // Convert a vehicle to another view model. (Generic Conversion) NOT TESTED
-        public T Convert<T> (Vehicle VModel) where T : class, new()
+        public static T Convert<T> (this Vehicle VModel) where T : class, new()
         {
             T newT = new T();
 
@@ -27,40 +27,60 @@ namespace Garage_2._5.Conversions
             return newT;
         }
 
-        public VehicleDetailsViewModel ConvertToVehicleDetailsModel (Vehicle VModel)
+        public static List<VehicleDetailsViewModel> ConvertToVehicleDetailsModel(this IEnumerable<Vehicle> VModel)
         {
-            VehicleDetailsViewModel VDModel = new VehicleDetailsViewModel();
+            List<VehicleDetailsViewModel> VDVModel = new List<VehicleDetailsViewModel>();
 
-            VDModel.Color = VModel.Color;
-            VDModel.OwnerName = VModel.Owner.Name;
-            VDModel.PNR = VModel.Owner.PNR;
-            VDModel.RegNr = VModel.RegNr;
-            VDModel.VehicleType = VModel.VehicleType.Name;
+            foreach (var v in VModel)
+            {
+                VehicleDetailsViewModel VDModel = new VehicleDetailsViewModel();
 
-            return VDModel;
+                VDModel.Color = v.Color;
+                VDModel.OwnerName = v.Owner.Name;
+                VDModel.PNR = v.Owner.PNR;
+                VDModel.RegNr = v.RegNr;
+                VDModel.VehicleType = v.VehicleType.Name;
+
+                VDVModel.Add(VDModel);
+                
+            }
+
+
+            return VDVModel;
         }
 
-        public VehicleViewModel ConvertToVehicleViewModel(Vehicle VModel)
+        public static List<VehicleViewModel> ConvertToVehicleViewModel(this IEnumerable<Vehicle> VModel)
         {
-            VehicleViewModel VVmodel = new VehicleViewModel();
+            List<VehicleViewModel> VVModel = new List<VehicleViewModel>();
 
-            VVmodel.Owner = VModel.Owner.Name;
-            VVmodel.RegNr = VModel.RegNr;
-            VVmodel.VehicleType = VModel.VehicleType.Name;
+            foreach (var v in VModel)
+            {
+                VehicleViewModel VVmodel = new VehicleViewModel();
 
-            return VVmodel;
+                VVmodel.Owner = v.Owner.Name;
+                VVmodel.RegNr = v.RegNr;
+                VVmodel.VehicleType = v.VehicleType.Name;
+
+                VVModel.Add(VVmodel);
+            }
+
+            return VVModel;
         }
 
-        public Vehicle ConvertyToVehicleFromCreateModel (VehicleCreateViewModel CVCModel)
+        public static Vehicle ConvertyToVehicleFromCreateModel(this VehicleCreateViewModel CVCModel)
         {
             Vehicle VModel = new Vehicle();
+            Owner owner = new Owner(){PNR = CVCModel.OwnerPNR};
+            VehicleType Vtype = new VehicleType() { TypeId = CVCModel.VehicleTypeId };
 
-            VModel.Owner = CVCModel.Owner;
+            
             VModel.RegNr = CVCModel.RegNr;
-            VModel.PNR = CVCModel.Owner.PNR;
-            VModel.VehicleType = CVCModel.VehicleType;
-            VModel.TypeId = CVCModel.VehicleType.TypeId;
+            VModel.PNR = CVCModel.OwnerPNR;
+            VModel.TypeId = CVCModel.VehicleTypeId;
             VModel.Color = CVCModel.Color;
+
+            VModel.VehicleType = Vtype;
+            VModel.Owner = owner;
 
             return VModel;
 
