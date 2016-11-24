@@ -37,7 +37,7 @@ namespace Garage_2._5.Repositories
             List<VehicleViewModel> VModelList = GContext.Vehicles.Where(v =>
                 Type == 0 ? true : v.VehicleType.TypeId == Type &&
                 v.RegNr.Contains(RegNr)
-                ).ConvertToVehicleViewModel();
+                ).ToList().ConvertToVehicleViewModel();
 
             return VModelList;
         }
@@ -47,7 +47,7 @@ namespace Garage_2._5.Repositories
             List<VehicleDetailsViewModel> VModelList = GContext.Vehicles.Where(v =>
                 Type == 0 ? true : v.VehicleType.TypeId == Type &&
                 v.RegNr.Contains(RegNr)
-                ).ConvertToVehicleDetailsModel();
+                ).ToList().ConvertToVehicleDetailsModel();
 
             return VModelList;
         }
