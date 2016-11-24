@@ -8,6 +8,7 @@ namespace Garage_2._5.Models
 {
     public class VehicleViewModel
     {
+        public int Id { get; set; }
         [Display(Name = "Registration Number")]
         public string RegNr { get; set; }
 
