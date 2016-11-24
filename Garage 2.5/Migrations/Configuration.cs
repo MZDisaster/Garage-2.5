@@ -41,6 +41,27 @@ namespace Garage_2._5.Migrations
                  owners
                 );
 
+            ;
+
+            //Owner o1 = context.Owners.Find(1);
+            //VehicleType vt1 = context.VehicleTypes.Find(1);
+
+
+            //Vehicle[] vehicles = new Vehicle[] {
+            //     new Vehicle { RegNr = "342UYT", Color = "Blue", PNR = o1.PNR, TypeId = vt1.TypeId , Owner = o1, VehicleType = vt1}};
+            //     //new Vehicle { RegNr = "123ABC", Color = "White", PNR = "880310", TypeId = 2 },
+            //     //new Vehicle {  RegNr = "777DDD", Color = "Black", PNR = "711001", TypeId = 3 },
+            //     //new Vehicle {  RegNr = "745GHF", Color = "Red", PNR = "990101", TypeId = 4 }};
+
+            //context.Vehicles.AddOrUpdate(
+            //     v => v.RegNr, vehicles                
+            //    );
+            //, Owner = owners.ElementAt(2), VehicleType = context.VehicleTypes.ElementAt(1)
+
+            //context.Vehicles.AddOrUpdate(
+               // v => v.RegNr,
+                //new Vehicle {  RegNr = "342UYT", Color = "Blue", PNR = o1.PNR.ToString(), TypeId = vt1.TypeId , Owner = o1, VehicleType = vt1}
+                              //  );
         }
     }
 }
