@@ -1,8 +1,0 @@
-﻿Garage 2.5
-- New Project
-- Models
-- Controller
-- Database
-- Seeding
-- Repository
-- Views
