@@ -11,7 +11,8 @@ namespace Garage_2._5.Controllers
     public class HomeController : Controller
     {
         GarageRepo Repo = new GarageRepo();
-        public ActionResult Index(int Type = 0, string RegNr = "")
+
+        public ActionResult Index(int VehicleTypeId = 0, string RegNr = "")
         {
             List<SelectListItem> types = new List<SelectListItem>();
             types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
@@ -20,11 +21,11 @@ namespace Garage_2._5.Controllers
                 types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
             }
             ViewBag.VehicleTypeId = types;
-
-            return View(Repo.SearchInIndex(Type, RegNr));
+            if (Request.IsAjaxRequest()) return PartialView("Index", Repo.SearchInIndex(VehicleTypeId, RegNr));
+            return View(Repo.SearchInIndex(VehicleTypeId, RegNr));
         }
 
-        public ActionResult DetailedList (int Type = 0, string RegNr = "")
+        public ActionResult DetailedList (int VehicleTypeId = 0, string RegNr = "")
         {
             List<SelectListItem> types = new List<SelectListItem>();
             types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
@@ -33,8 +34,8 @@ namespace Garage_2._5.Controllers
                 types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
             }
             ViewBag.VehicleTypeId = types;
-
-            return View(Repo.SearchInDetails(Type, RegNr));
+            if (Request.IsAjaxRequest()) return PartialView("DetailedList", Repo.SearchInDetails(VehicleTypeId, RegNr));
+            return View(Repo.SearchInDetails(VehicleTypeId, RegNr));
         }
 
         public ActionResult Details(int? Id)
