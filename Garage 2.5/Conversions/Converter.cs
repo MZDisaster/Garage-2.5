@@ -34,7 +34,7 @@ namespace Garage_2._5.Conversions
             foreach (var v in VModel)
             {
                 VehicleDetailsViewModel VDModel = new VehicleDetailsViewModel();
-
+                VDModel.Id = v.VehicleId;
                 VDModel.Color = v.Color;
                 VDModel.OwnerName = v.Owner.Name;
                 VDModel.PNR = v.Owner.PNR;
@@ -56,7 +56,7 @@ namespace Garage_2._5.Conversions
             foreach (var v in VModel)
             {
                 VehicleViewModel VVmodel = new VehicleViewModel();
-
+                VVmodel.Id = v.VehicleId;
                 VVmodel.Owner = v.Owner.Name;
                 VVmodel.RegNr = v.RegNr;
                 VVmodel.VehicleType = v.VehicleType.Name;

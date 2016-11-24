@@ -70,10 +70,36 @@ namespace Garage_2._5.Controllers
         {
             if (Id.HasValue)
             {
-                return View(Repo.GetVehicle(Id));
+                Vehicle vehicleToEdit = Repo.GetVehicleById(Id.Value);
+                List<SelectListItem> types = new List<SelectListItem>();
+                foreach (VehicleType type in Repo.GContext.VehicleTypes)
+                {
+                    types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
+                }
+                ViewBag.TypeId = types;
+
+                List<SelectListItem> owners = new List<SelectListItem>();
+                foreach (Owner owner in Repo.GContext.Owners)
+                {
+                    owners.Add(new SelectListItem() { Text = owner.Name, Value = owner.PNR });
+                }
+                ViewBag.PNR = owners;
+                return View(vehicleToEdit);
             }
             else
                 return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "VehicleId, RegNr, Color, PNR, TypeId")] Vehicle editVehicle)
+        {
+            if (ModelState.IsValid)
+            {
+                Repo.EditVehicle(editVehicle);
+                return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Edit", new { Id = editVehicle.VehicleId });
         }
     }
 }
