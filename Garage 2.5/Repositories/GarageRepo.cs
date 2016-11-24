@@ -102,5 +102,12 @@ namespace Garage_2._5.Repositories
             return GContext.VehicleTypes.Where(vt => vt.Name == name).First();
             
         }
+
+        public void RemoveVehicle(int? id)
+        {
+            Vehicle vehicle = GContext.Vehicles.Find(id);
+            GContext.Vehicles.Remove(vehicle);
+            GContext.SaveChanges();
+        }
     }
 }
