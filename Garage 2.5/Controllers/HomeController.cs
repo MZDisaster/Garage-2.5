@@ -21,6 +21,15 @@ namespace Garage_2._5.Controllers
             return View(Repo.SearchInDetails(Type, RegNr));
         }
 
+        public ActionResult Details(int? Id)
+        {
+            if (Id.HasValue)
+            {
+                return View(Repo.GetVehicleDetailsViewModelById(Id.Value));
+            }
+            else return RedirectToAction("Index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -102,6 +111,24 @@ namespace Garage_2._5.Controllers
             }
             else
                 return RedirectToAction("Edit", new { Id = editVehicle.VehicleId });
+        }
+
+        public ActionResult OwnerDetails(string id)
+        {
+            if (id!= null)
+            {
+                return View(Repo.GetOwnerByPNR(id));
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult TypeDetails(string id)
+        {
+            if (id != null)
+            {
+                return View(Repo.GetTypeByName(id));
+            }
+            return RedirectToAction("Index");
         }
     }
 }

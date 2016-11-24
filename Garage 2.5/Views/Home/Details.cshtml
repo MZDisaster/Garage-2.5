@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VehicleType)
+            @Html.ActionLink(Model.VehicleType, "TypeDetails", new { id = Model.VehicleType })
         </dd>
 
         <dt>
@@ -31,7 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OwnerName)
+            @Html.ActionLink(Model.OwnerName, "OwnerDetails", new { id = Model.PNR })
         </dd>
 
         <dt>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VehicleId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
