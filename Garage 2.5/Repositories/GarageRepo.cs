@@ -22,6 +22,17 @@ namespace Garage_2._5.Repositories
         {
             return GContext.Vehicles.Find(id);
         }
+        /// <summary>
+        /// Uses the List-converter in Converter on a single-element list consisting of the Vehicle with VehicleId == id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public VehicleDetailsViewModel GetVehicleDetailsViewModelById(int id)
+        {
+            List<Vehicle> tmplist = new List<Vehicle>();
+            tmplist.Add(GContext.Vehicles.Find(id));
+            return Converter.ConvertToVehicleDetailsModel(tmplist).First();
+        }
 
         public IEnumerable<VehicleViewModel> GetVehicleList()
         {
@@ -80,6 +91,15 @@ namespace Garage_2._5.Repositories
             toEdit.Owner = GContext.Owners.Find(toEdit.PNR);
             toEdit.VehicleType = GContext.VehicleTypes.Find(toEdit.TypeId);
             GContext.SaveChanges();
+            
+        }
+        public Owner GetOwnerByPNR(string PNR)
+        {
+            return GContext.Owners.Where(o => o.PNR == PNR).First();
+        }
+        public VehicleType GetTypeByName(string name)
+        {
+            return GContext.VehicleTypes.Where(vt => vt.Name == name).First();
             
         }
     }
