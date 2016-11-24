@@ -16,10 +16,10 @@
             @Html.DisplayNameFor(model => model.RegNr)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VehicleType.Name)
+            @Html.DisplayNameFor(model => model.VehicleType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Owner.Name)
+            @Html.DisplayNameFor(model => model.Owner)
         </th>
         <th></th>
     </tr>
@@ -31,15 +31,15 @@
                 @Html.DisplayFor(modelItem => item.RegNr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VehicleType.Name)
+                @Html.DisplayFor(modelItem => item.VehicleType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Owner.Name)
+                @Html.DisplayFor(modelItem => item.Owner)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.VehicleId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.VehicleId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.VehicleId })
+                @Html.ActionLink("Edit", "Edit", new { /*id = item.VehicleId*/ }) |
+                @Html.ActionLink("Details", "Details", new { /*id = item.VehicleId*/ }) |
+                @Html.ActionLink("Delete", "Delete", new { /*id = item.VehicleId*/ })
             </td>
         </tr>
     }
