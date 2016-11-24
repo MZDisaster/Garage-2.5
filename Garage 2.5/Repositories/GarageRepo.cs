@@ -24,7 +24,7 @@ namespace Garage_2._5.Repositories
         {
             var VModelList = GContext.Vehicles.Select(v => Converter.ConvertToVehicleViewModel(v));
 
-            return VModelList;
+            return VModelList.ToList();
         }
 
         public IEnumerable<VehicleDetailsViewModel> GetVehiclesDetailsList()
