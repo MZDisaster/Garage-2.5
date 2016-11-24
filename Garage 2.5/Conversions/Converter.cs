@@ -27,28 +27,44 @@ namespace Garage_2._5.Conversions
             return newT;
         }
 
-        public VehicleDetailsViewModel ConvertToVehicleDetailsModel (Vehicle VModel)
+        public List<VehicleDetailsViewModel> ConvertToVehicleDetailsModel (IEnumerable<Vehicle> VModel)
         {
-            VehicleDetailsViewModel VDModel = new VehicleDetailsViewModel();
+            List<VehicleDetailsViewModel> VDVModel = new List<VehicleDetailsViewModel>();
 
-            VDModel.Color = VModel.Color;
-            VDModel.OwnerName = VModel.Owner.Name;
-            VDModel.PNR = VModel.Owner.PNR;
-            VDModel.RegNr = VModel.RegNr;
-            VDModel.VehicleType = VModel.VehicleType.Name;
+            foreach (var v in VModel)
+            {
+                VehicleDetailsViewModel VDModel = new VehicleDetailsViewModel();
 
-            return VDModel;
+                VDModel.Color = v.Color;
+                VDModel.OwnerName = v.Owner.Name;
+                VDModel.PNR = v.Owner.PNR;
+                VDModel.RegNr = v.RegNr;
+                VDModel.VehicleType = v.VehicleType.Name;
+
+                VDVModel.Add(VDModel);
+                
+            }
+
+
+            return VDVModel;
         }
 
-        public VehicleViewModel ConvertToVehicleViewModel(Vehicle VModel)
+        public List<VehicleViewModel> ConvertToVehicleViewModel(IEnumerable<Vehicle> VModel)
         {
-            VehicleViewModel VVmodel = new VehicleViewModel();
+            List<VehicleViewModel> VVModel = new List<VehicleViewModel>();
 
-            VVmodel.Owner = VModel.Owner.Name;
-            VVmodel.RegNr = VModel.RegNr;
-            VVmodel.VehicleType = VModel.VehicleType.Name;
+            foreach (var v in VModel)
+            {
+                VehicleViewModel VVmodel = new VehicleViewModel();
 
-            return VVmodel;
+                VVmodel.Owner = v.Owner.Name;
+                VVmodel.RegNr = v.RegNr;
+                VVmodel.VehicleType = v.VehicleType.Name;
+
+                VVModel.Add(VVmodel);
+            }
+
+            return VVModel;
         }
 
         public Vehicle ConvertyToVehicleFromCreateModel (VehicleCreateViewModel CVCModel)
