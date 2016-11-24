@@ -16,9 +16,10 @@ namespace Garage_2._5.Models
         public string Color { get; set; }
 
         [Required]
-        public Owner Owner { get; set; }
+        public string OwnerPNR { get; set; }
 
         [Required]
-        public VehicleType VehicleType { get; set; }
+        public int VehicleTypeId { get; set; }
+
     }
 }

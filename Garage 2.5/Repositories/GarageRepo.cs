@@ -13,8 +13,6 @@ namespace Garage_2._5.Repositories
     {
         public GarageContext GContext { get; set; }
 
-        protected Converter Converter = new Converter();
-
         public GarageRepo()
         {
             GContext = new GarageContext();
@@ -22,34 +20,34 @@ namespace Garage_2._5.Repositories
 
         public IEnumerable<VehicleViewModel> GetVehicleList()
         {
-            List<VehicleViewModel> VModelList = Converter.ConvertToVehicleViewModel(GContext.Vehicles.Select(v => v));
+            List<VehicleViewModel> VModelList = GContext.Vehicles.ConvertToVehicleViewModel();
 
             return VModelList.ToList();
         }
 
         public IEnumerable<VehicleDetailsViewModel> GetVehiclesDetailsList()
         {
-            List<VehicleDetailsViewModel> VDModelList = Converter.ConvertToVehicleDetailsModel(GContext.Vehicles.Select(v => v));
+            List<VehicleDetailsViewModel> VDModelList = GContext.Vehicles.ConvertToVehicleDetailsModel();
 
             return VDModelList;
         }
 
         public IEnumerable<VehicleViewModel> SearchInIndex(int Type, string RegNr)
         {
-            List<VehicleViewModel> VModelList = Converter.ConvertToVehicleViewModel(GContext.Vehicles.Where(v =>
+            List<VehicleViewModel> VModelList = GContext.Vehicles.Where(v =>
                 v.VehicleType.TypeId == Type &&
                 v.RegNr.Contains(RegNr)
-                ));
+                ).ConvertToVehicleViewModel();
 
             return VModelList;
         }
 
         public IEnumerable<VehicleDetailsViewModel> SearchInDetails(int Type, string RegNr)
         {
-            List<VehicleDetailsViewModel> VModelList = Converter.ConvertToVehicleDetailsModel(GContext.Vehicles.Where(v =>
+            List<VehicleDetailsViewModel> VModelList = GContext.Vehicles.Where(v =>
                 v.VehicleType.TypeId == Type &&
                 v.RegNr.Contains(RegNr)
-                ).Select(v => v));
+                ).ConvertToVehicleDetailsModel();
 
             return VModelList;
         }
@@ -57,7 +55,7 @@ namespace Garage_2._5.Repositories
         // should be working
         public void AddVehicle(VehicleCreateViewModel VCVModel)
         {
-            GContext.Vehicles.Add(Converter.ConvertyToVehicleFromCreateModel(VCVModel));
+            GContext.Vehicles.Add(VCVModel.ConvertyToVehicleFromCreateModel());
             GContext.SaveChanges();
         }
     }

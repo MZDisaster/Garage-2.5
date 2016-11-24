@@ -7,10 +7,10 @@ using System.Web;
 
 namespace Garage_2._5.Conversions
 {
-    public class Converter
+    public static class Converter
     {
         // Convert a vehicle to another view model. (Generic Conversion) NOT TESTED
-        public T Convert<T> (Vehicle VModel) where T : class, new()
+        public static T Convert<T> (this Vehicle VModel) where T : class, new()
         {
             T newT = new T();
 
@@ -27,7 +27,7 @@ namespace Garage_2._5.Conversions
             return newT;
         }
 
-        public List<VehicleDetailsViewModel> ConvertToVehicleDetailsModel (IEnumerable<Vehicle> VModel)
+        public static List<VehicleDetailsViewModel> ConvertToVehicleDetailsModel(this IEnumerable<Vehicle> VModel)
         {
             List<VehicleDetailsViewModel> VDVModel = new List<VehicleDetailsViewModel>();
 
@@ -49,7 +49,7 @@ namespace Garage_2._5.Conversions
             return VDVModel;
         }
 
-        public List<VehicleViewModel> ConvertToVehicleViewModel(IEnumerable<Vehicle> VModel)
+        public static List<VehicleViewModel> ConvertToVehicleViewModel(this IEnumerable<Vehicle> VModel)
         {
             List<VehicleViewModel> VVModel = new List<VehicleViewModel>();
 
@@ -67,16 +67,20 @@ namespace Garage_2._5.Conversions
             return VVModel;
         }
 
-        public Vehicle ConvertyToVehicleFromCreateModel (VehicleCreateViewModel CVCModel)
+        public static Vehicle ConvertyToVehicleFromCreateModel(this VehicleCreateViewModel CVCModel)
         {
             Vehicle VModel = new Vehicle();
+            Owner owner = new Owner(){PNR = CVCModel.OwnerPNR};
+            VehicleType Vtype = new VehicleType() { TypeId = CVCModel.VehicleTypeId };
 
-            VModel.Owner = CVCModel.Owner;
+            
             VModel.RegNr = CVCModel.RegNr;
-            VModel.PNR = CVCModel.Owner.PNR;
-            VModel.VehicleType = CVCModel.VehicleType;
-            VModel.TypeId = CVCModel.VehicleType.TypeId;
+            VModel.PNR = CVCModel.OwnerPNR;
+            VModel.TypeId = CVCModel.VehicleTypeId;
             VModel.Color = CVCModel.Color;
+
+            VModel.VehicleType = Vtype;
+            VModel.Owner = owner;
 
             return VModel;
 
