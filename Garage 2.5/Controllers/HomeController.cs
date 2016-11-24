@@ -152,23 +152,16 @@ namespace Garage_2._5.Controllers
         {
             if (id != null)
             {
-                return View(Repo.GetVehicleById(id.Value));
-                //Vehicle v = Repo.GetVehicleById(id.Value);
-                //return RedirectToAction("Index");
-                //CheckOutViewModel checkoutviewmodel = new CheckOutViewModel { vehicle = v };
-
-                //return PartialView("Checkout", checkoutviewmodel);
+                return View(Repo.GetVehicleById(id.Value));                
             }
             else
                 return RedirectToAction("Index");
         }
-
-        
+       
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Repo.RemoveVehicle(id)
-            repo.RemoveItem(id);
+            Repo.RemoveVehicle(id);          
             return RedirectToAction("Index");
         }
 
