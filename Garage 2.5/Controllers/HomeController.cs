@@ -13,11 +13,27 @@ namespace Garage_2._5.Controllers
         GarageRepo Repo = new GarageRepo();
         public ActionResult Index(int Type = 0, string RegNr = "")
         {
+            List<SelectListItem> types = new List<SelectListItem>();
+            types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
+            foreach (VehicleType type in Repo.GContext.VehicleTypes)
+            {
+                types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
+            }
+            ViewBag.VehicleTypeId = types;
+
             return View(Repo.SearchInIndex(Type, RegNr));
         }
 
         public ActionResult DetailedList (int Type = 0, string RegNr = "")
         {
+            List<SelectListItem> types = new List<SelectListItem>();
+            types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
+            foreach (VehicleType type in Repo.GContext.VehicleTypes)
+            {
+                types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
+            }
+            ViewBag.VehicleTypeId = types;
+
             return View(Repo.SearchInDetails(Type, RegNr));
         }
 
