@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Garage_2._5.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,10 @@ namespace Garage_2._5.Controllers
 {
     public class HomeController : Controller
     {
+        GarageRepo Repo = new GarageRepo();
         public ActionResult Index()
         {
-            return View();
+            return View(Repo.GetVehicleList());
         }
 
         public ActionResult About()

@@ -9,7 +9,7 @@ namespace Garage_2._5.DAL
 {
     public class GarageContext : DbContext
     {
-        public GarageContext() : base("DefaultConnection")
+        public GarageContext() : base("NewConnection")
         {
 
         }
