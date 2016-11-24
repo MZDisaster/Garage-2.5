@@ -11,9 +11,14 @@ namespace Garage_2._5.Controllers
     public class HomeController : Controller
     {
         GarageRepo Repo = new GarageRepo();
-        public ActionResult Index()
+        public ActionResult Index(int Type = 0, string RegNr = "")
         {
-            return View(Repo.GetVehicleList());
+            return View(Repo.SearchInIndex(Type, RegNr));
+        }
+
+        public ActionResult DetailedList (int Type = 0, string RegNr = "")
+        {
+            return View(Repo.SearchInDetails(Type, RegNr));
         }
 
         public ActionResult About()
@@ -37,14 +42,22 @@ namespace Garage_2._5.Controllers
             {
                 types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
             }
-            ViewBag.VehicleTypes = types;
+            ViewBag.VehicleTypeId = types;
             List<SelectListItem> owners = new List<SelectListItem>();
             foreach (Owner owner in Repo.GContext.Owners)
             {
                 owners.Add(new SelectListItem() { Text = owner.Name, Value = owner.PNR });
             }
-            ViewBag.Owners = owners;
-            return View(new Vehicle());
+            ViewBag.OwnerPNR = owners;
+            return View(new VehicleCreateViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult  Create([Bind(Include = "RegNr, Color, OwnerPNR, VehicleTypeId")]VehicleCreateViewModel newVehicle)
+        {
+            Repo.AddVehicle(newVehicle);
+            return RedirectToAction("Index");
         }
     }
 }

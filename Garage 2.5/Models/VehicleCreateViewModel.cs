@@ -9,7 +9,7 @@ namespace Garage_2._5.Models
     public class VehicleCreateViewModel
     {
         [Required]
-        [RegularExpression("/^[A-Z]{3}[0-9]{3}/")]
+        [RegularExpression("^[A-Z]{3}[0-9]{3}$")]
         [Display(Name = "Registration Number")]
         public string RegNr { get; set; }
 

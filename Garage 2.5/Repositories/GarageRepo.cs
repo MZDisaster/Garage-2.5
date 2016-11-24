@@ -55,7 +55,10 @@ namespace Garage_2._5.Repositories
         // should be working
         public void AddVehicle(VehicleCreateViewModel VCVModel)
         {
-            GContext.Vehicles.Add(VCVModel.ConvertyToVehicleFromCreateModel());
+            Vehicle toAdd = VCVModel.ConvertyToVehicleFromCreateModel();
+            toAdd.Owner = GContext.Owners.Find(toAdd.PNR);
+            toAdd.VehicleType = GContext.VehicleTypes.Find(toAdd.TypeId);
+            GContext.Vehicles.Add(toAdd);
             GContext.SaveChanges();
         }
     }
