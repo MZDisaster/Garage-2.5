@@ -18,6 +18,11 @@ namespace Garage_2._5.Repositories
             GContext = new GarageContext();
         }
 
+        public Vehicle GetVehicleById(int id)
+        {
+            return GContext.Vehicles.Find(id);
+        }
+
         public IEnumerable<VehicleViewModel> GetVehicleList()
         {
             List<VehicleViewModel> VModelList = GContext.Vehicles.ConvertToVehicleViewModel();
