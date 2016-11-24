@@ -43,12 +43,14 @@ namespace Garage_2._5.Controllers
                 types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
             }
             ViewBag.VehicleTypeId = types;
+
             List<SelectListItem> owners = new List<SelectListItem>();
             foreach (Owner owner in Repo.GContext.Owners)
             {
                 owners.Add(new SelectListItem() { Text = owner.Name, Value = owner.PNR });
             }
             ViewBag.OwnerPNR = owners;
+
             return View(new VehicleCreateViewModel());
         }
 
@@ -56,8 +58,22 @@ namespace Garage_2._5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult  Create([Bind(Include = "RegNr, Color, OwnerPNR, VehicleTypeId")]VehicleCreateViewModel newVehicle)
         {
-            Repo.AddVehicle(newVehicle);
+            if (ModelState.IsValid)
+            {
+                Repo.AddVehicle(newVehicle);
+            }
+            
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int? Id)
+        {
+            if (Id.HasValue)
+            {
+                return View(Repo.GetVehicle(Id));
+            }
+            else
+                return RedirectToAction("Index");
         }
     }
 }
