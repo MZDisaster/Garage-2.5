@@ -1,8 +1,10 @@
 ﻿### Garage 2.5
 - [X] New Project
-- [ ] Models
-- [ ] Controller
+- [X] Models
+- [X] Controller
 - [X] Database
 - [X] Seeding
-- [ ] Repository
+- [X] Repository
 - [X] Views
+- [ ] Search by Regnr
+- [ ] Search by Type
