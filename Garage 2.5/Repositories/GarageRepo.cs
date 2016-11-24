@@ -66,5 +66,21 @@ namespace Garage_2._5.Repositories
             GContext.Vehicles.Add(toAdd);
             GContext.SaveChanges();
         }
+        /// <summary>
+        /// Edits an entry in the database by first finding the relevant entry then overwriting all its properties, then finding its related Owner and Type, finally saving changes.
+        /// </summary>
+        /// <param name="VModel">Vehicle with edited values</param>
+        public void EditVehicle(Vehicle VModel)
+        {
+            Vehicle toEdit = GContext.Vehicles.Find(VModel.VehicleId);
+            toEdit.RegNr = VModel.RegNr;
+            toEdit.Color = VModel.Color;
+            toEdit.PNR = VModel.PNR;
+            toEdit.TypeId = VModel.TypeId;
+            toEdit.Owner = GContext.Owners.Find(toEdit.PNR);
+            toEdit.VehicleType = GContext.VehicleTypes.Find(toEdit.TypeId);
+            GContext.SaveChanges();
+            
+        }
     }
 }

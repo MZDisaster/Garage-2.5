@@ -72,14 +72,16 @@ namespace Garage_2._5.Controllers
             {
                 Vehicle vehicleToEdit = Repo.GetVehicleById(Id.Value);
                 List<SelectListItem> types = new List<SelectListItem>();
-                foreach (VehicleType type in Repo.GContext.VehicleTypes)
+                types.Add(new SelectListItem() { Text = vehicleToEdit.VehicleType.Name, Value = vehicleToEdit.TypeId.ToString() });
+                foreach (VehicleType type in Repo.GContext.VehicleTypes.Where(vt => vt.TypeId != vehicleToEdit.TypeId))
                 {
                     types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
                 }
                 ViewBag.TypeId = types;
 
                 List<SelectListItem> owners = new List<SelectListItem>();
-                foreach (Owner owner in Repo.GContext.Owners)
+                owners.Add(new SelectListItem() { Text = vehicleToEdit.Owner.Name, Value = vehicleToEdit.PNR });
+                foreach (Owner owner in Repo.GContext.Owners.Where(o => o.PNR != vehicleToEdit.PNR))
                 {
                     owners.Add(new SelectListItem() { Text = owner.Name, Value = owner.PNR });
                 }
