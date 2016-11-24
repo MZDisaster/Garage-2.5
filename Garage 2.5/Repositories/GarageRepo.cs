@@ -103,8 +103,10 @@ namespace Garage_2._5.Repositories
             
         }
 
-        public void RemoveVehicle(Vehicle V){
-            GContext.Vehicles.Remove(V);
+        public void RemoveVehicle(int? id)
+        {
+            Vehicle vehicle = GContext.Vehicles.Find(id);
+            GContext.Vehicles.Remove(vehicle);
             GContext.SaveChanges();
         }
     }
