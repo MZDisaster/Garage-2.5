@@ -11,7 +11,7 @@ namespace Garage_2._5.Migrations
                 "dbo.Owners",
                 c => new
                     {
-                        PNR = c.Int(nullable: false, identity: true),
+                        PNR = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                     })
                 .PrimaryKey(t => t.PNR);
@@ -23,11 +23,11 @@ namespace Garage_2._5.Migrations
                         VehicleId = c.Int(nullable: false, identity: true),
                         RegNr = c.String(),
                         Color = c.String(),
-                        PNR = c.Int(nullable: false),
+                        PNR = c.String(maxLength: 128),
                         TypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.VehicleId)
-                .ForeignKey("dbo.Owners", t => t.PNR, cascadeDelete: true)
+                .ForeignKey("dbo.Owners", t => t.PNR)
                 .ForeignKey("dbo.VehicleTypes", t => t.TypeId, cascadeDelete: true)
                 .Index(t => t.PNR)
                 .Index(t => t.TypeId);

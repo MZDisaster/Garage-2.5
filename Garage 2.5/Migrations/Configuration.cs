@@ -24,19 +24,21 @@ namespace Garage_2._5.Migrations
                 new VehicleType { Name = "Motorcycle" }
                 );
 
+            Owner[] owners = new Owner[] {
+                 new Owner { PNR = "610722" , Name = "Olle Ollesson"      },
+                 new Owner { PNR = "880310" , Name = "Pelle Pellesson"    },
+                 new Owner { PNR = "711001" , Name = "Ernst Ernstsson"    },
+                 new Owner { PNR = "990101" , Name = "Bert Bertsson"      },
+                 new Owner { PNR = "930101" , Name = "Kalle Kallesson"    },
+                 new Owner { PNR = "960105" , Name = "Ludvig Ludvigsson"  },
+                 new Owner { PNR = "900101" , Name = "Rolf Rolfsson"      },
+                 new Owner { PNR = "860103" , Name = "Egon Egonsson"      },
+                 new Owner { PNR = "760303" , Name = "Leif Leifsson"      },
+                 new Owner { PNR = "790403" , Name = "Eva Evasson"        }};
 
             context.Owners.AddOrUpdate(
-                o => o.Name,
-                 new Owner { Name = "Olle Ollesson" , PNR = 610722},
-                 new Owner { Name = "Pelle Pellesson" , PNR = 880310},
-                 new Owner { Name = "Ernst Ernstsson" , PNR = 711001},
-                 new Owner { Name = "Bert Bertsson" , PNR = 990101},
-                 new Owner { Name = "Kalle Kallesson", PNR = 930101 },
-                 new Owner { Name = "Ludvig Ludvigsson" , PNR = 960105},
-                 new Owner { Name = "Rolf Rolfsson" , PNR = 900101},
-                 new Owner { Name = "Egon Egonsson" , PNR = 860103},
-                 new Owner { Name = "Leif Leifsson", PNR = 760303 },
-                 new Owner { Name = "Eva Evasson", PNR = 790403 }
+                 o => o.PNR,
+                 owners
                 );
 
         }

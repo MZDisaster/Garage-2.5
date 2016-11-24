@@ -18,7 +18,7 @@ namespace Garage_2._5.Models
         public string Color { get; set; }
 
         [ForeignKey("Owner")]
-        public int PNR { get; set; }
+        public string PNR { get; set; }
 
         [ForeignKey("VehicleType")]
         public int TypeId { get; set; }

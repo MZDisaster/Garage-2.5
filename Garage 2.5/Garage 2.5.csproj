@@ -123,13 +123,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611231425376_initial.cs" />
-    <Compile Include="Migrations\201611231425376_initial.Designer.cs">
-      <DependentUpon>201611231425376_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611231457357_two.cs" />
-    <Compile Include="Migrations\201611231457357_two.Designer.cs">
-      <DependentUpon>201611231457357_two.cs</DependentUpon>
+    <Compile Include="Migrations\201611240837285_initial.cs" />
+    <Compile Include="Migrations\201611240837285_initial.Designer.cs">
+      <DependentUpon>201611240837285_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Owner.cs" />
@@ -142,6 +138,10 @@
     <Compile Include="Repositories\GarageRepo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\GarageDB2.mdf" />
+    <Content Include="App_Data\GarageDB2_log.ldf">
+      <DependentUpon>GarageDB2.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\GarageDB.mdf" />
     <Content Include="App_Data\GarageDB_log.ldf">
       <DependentUpon>GarageDB.mdf</DependentUpon>
@@ -190,19 +190,16 @@
     <Content Include="Views\Home\TypeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611231425376_initial.resx">
-      <DependentUpon>201611231425376_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611231457357_two.resx">
-      <DependentUpon>201611231457357_two.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611240837285_initial.resx">
+      <DependentUpon>201611240837285_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
