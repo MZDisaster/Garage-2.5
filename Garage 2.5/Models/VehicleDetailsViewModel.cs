@@ -17,7 +17,7 @@ namespace Garage_2._5.Models
         public string Color { get; set; }
 
         [Display(Name = "Personal Number")]
-        public int PNR { get; set; }
+        public string PNR { get; set; }
 
         [Display(Name = "Owner Name")]
         public string OwnerName { get; set; }

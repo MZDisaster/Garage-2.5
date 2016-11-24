@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Garage_2._5.Models.Vehicle>
+﻿@model IEnumerable<Garage_2._5.Models.VehicleDetailsViewModel>
 
 @{
     ViewBag.Title = "DetailedList";
@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.RegNr)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VehicleType.Name)
+            @Html.DisplayNameFor(model => model.VehicleType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Owner.Name)
+            @Html.DisplayNameFor(model => model.OwnerName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Color)
@@ -32,10 +32,10 @@
             @Html.DisplayFor(modelItem => item.RegNr)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VehicleType.Name)
+            @Html.DisplayFor(modelItem => item.VehicleType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Owner.Name)
+            @Html.DisplayFor(modelItem => item.OwnerName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Color)
