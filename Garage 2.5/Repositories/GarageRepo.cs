@@ -51,7 +51,7 @@ namespace Garage_2._5.Repositories
         public IEnumerable<VehicleViewModel> SearchInIndex(int Type, string RegNr)
         {
             List<VehicleViewModel> VModelList = GContext.Vehicles.Where(v =>
-                Type == 0 ? true : v.VehicleType.TypeId == Type &&
+                (Type == 0 ? true : v.VehicleType.TypeId == Type) &&
                 v.RegNr.Contains(RegNr)
                 ).ToList().ConvertToVehicleViewModel();
 
@@ -61,7 +61,7 @@ namespace Garage_2._5.Repositories
         public IEnumerable<VehicleDetailsViewModel> SearchInDetails(int Type, string RegNr)
         {
             List<VehicleDetailsViewModel> VModelList = GContext.Vehicles.Where(v =>
-                Type == 0 ? true : v.VehicleType.TypeId == Type &&
+                (Type == 0 ? true : v.VehicleType.TypeId == Type) &&
                 v.RegNr.Contains(RegNr)
                 ).ToList().ConvertToVehicleDetailsModel();
 
