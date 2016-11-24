@@ -2,7 +2,7 @@
 - [X] New Project
 - [ ] Models
 - [ ] Controller
-- [ ] Database
-- [ ] Seeding
+- [X] Database
+- [X] Seeding
 - [ ] Repository
-- [ ] Views
+- [X] Views
