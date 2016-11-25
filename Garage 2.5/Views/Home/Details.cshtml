@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.VehicleType, "TypeDetails", new { id = Model.VehicleType })
+            @Html.DisplayFor(model => model.VehicleType)<!--@@Html.ActionLink(Model.VehicleType, "TypeDetails", new { id = Model.VehicleType })-->
         </dd>
 
         <dt>
