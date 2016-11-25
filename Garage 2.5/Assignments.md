@@ -6,5 +6,8 @@
 - [X] Seeding
 - [X] Repository
 - [X] Views
-- [ ] Search by Regnr
-- [ ] Search by Type
+- [X] Search by Regnr
+- [X] Search by Type
+- [X] Owner View
+- [X] Type View
+- [X] Delete
