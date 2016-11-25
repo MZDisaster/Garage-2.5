@@ -94,6 +94,11 @@ namespace Garage_2._5.Repositories
             GContext.SaveChanges();
             
         }
+        /// <summary>
+        /// Creates a new Owner View Model for the OwnerDetails view, consisting of an Owner and a list of that Owner's Vehicles
+        /// </summary>
+        /// <param name="PNR"></param>
+        /// <returns></returns>
         public OwnerViewModel GetOwnerByPNR(string PNR)
         {
             OwnerViewModel OVModel = new OwnerViewModel();
@@ -101,6 +106,11 @@ namespace Garage_2._5.Repositories
             OVModel.Vehicles = GContext.Vehicles.Where(v => v.Owner.PNR == OVModel.Owner.PNR).ToList();
             return OVModel;
         }
+        /// <summary>
+        /// Creates a new VehicleType View Model for the TypeDetails view, consisting of a VehicleType and a list of all Vehicles of that type
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public VehicleTypeViewModel GetTypeByName(string name)
         {
             VehicleTypeViewModel VTVModel = new VehicleTypeViewModel();
@@ -110,7 +120,7 @@ namespace Garage_2._5.Repositories
             
         }
 
-        public void RemoveVehicle(int? id)
+        public void RemoveVehicle(int id)
         {
             Vehicle vehicle = GContext.Vehicles.Find(id);
             GContext.Vehicles.Remove(vehicle);
