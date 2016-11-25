@@ -167,8 +167,8 @@ namespace Garage_2._5.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Repo.RemoveVehicle(id)
-            repo.RemoveItem(id);
+            Repo.RemoveVehicle(id);
+            
             return RedirectToAction("Index");
         }
 

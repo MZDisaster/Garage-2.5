@@ -1,4 +1,4 @@
-﻿@model Garage_2._5.Models.VehicleType
+﻿@model Garage_2._5.ViewModels.VehicleTypeViewModel
 
 @{
     ViewBag.Title = "TypeDetails";
@@ -20,6 +20,37 @@
 
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicles.RegNr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicles.VehicleType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicles.Owner)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Vehicles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+
+        </tr>
+    }
+
+</table>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Index", "Index")
 </p>

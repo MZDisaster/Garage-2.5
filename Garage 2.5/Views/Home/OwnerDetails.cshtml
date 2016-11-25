@@ -1,4 +1,4 @@
-﻿@model Garage_2._5.Models.Owner
+﻿@model Garage_2._5.ViewModels.OwnerViewModel
 
 @{
     ViewBag.Title = "OwnerDetails";
@@ -11,16 +11,59 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Owner.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Owner.Name)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner.PNR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.PNR)
+        </dd>
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicles.First().RegNr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicles.First().Color)
+        </th>
+        <th>
+            Vehicle Type
+        </th>
+        <th>
+            Owner
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Vehicles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegNr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Name)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
 <p>
     
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Index", "Index")
 </p>

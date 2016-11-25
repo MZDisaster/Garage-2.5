@@ -1,6 +1,7 @@
 ﻿using Garage_2._5.Conversions;
 using Garage_2._5.DAL;
 using Garage_2._5.Models;
+using Garage_2._5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,13 +94,19 @@ namespace Garage_2._5.Repositories
             GContext.SaveChanges();
             
         }
-        public Owner GetOwnerByPNR(string PNR)
+        public OwnerViewModel GetOwnerByPNR(string PNR)
         {
-            return GContext.Owners.Where(o => o.PNR == PNR).First();
+            OwnerViewModel OVModel = new OwnerViewModel();
+            OVModel.Owner = GContext.Owners.Where(o => o.PNR == PNR).First();
+            OVModel.Vehicles = GContext.Vehicles.Where(v => v.Owner.PNR == OVModel.Owner.PNR).ToList();
+            return OVModel;
         }
-        public VehicleType GetTypeByName(string name)
+        public VehicleTypeViewModel GetTypeByName(string name)
         {
-            return GContext.VehicleTypes.Where(vt => vt.Name == name).First();
+            VehicleTypeViewModel VTVModel = new VehicleTypeViewModel();
+            VTVModel.VehicleType = GContext.VehicleTypes.Where(vt => vt.Name == name).First();
+            VTVModel.Vehicles = GContext.Vehicles.Where(v => v.VehicleType.TypeId == VTVModel.VehicleType.TypeId).ToList();
+            return VTVModel;
             
         }
 

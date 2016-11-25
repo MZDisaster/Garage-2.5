@@ -11,6 +11,7 @@ namespace Garage_2._5.Models
         [Key]
         public int TypeId { get; set; }
 
+        
         public string Name { get; set; }
     }
 }
