@@ -9,8 +9,8 @@ namespace Garage_2._5.Conversions
 {
     public static class Converter
     {
-        // Convert a vehicle to another view model. (Generic Conversion) NOT TESTED
-        public static T Convert<T> (this Vehicle VModel) where T : class, new()
+        // Convert a vehicle to another view model. (Generic Conversion) NOT TESTED.
+        /*public static T Convert<T> (this Vehicle VModel) where T : T, new()
         {
             T newT = new T();
 
@@ -20,13 +20,28 @@ namespace Garage_2._5.Conversions
                 PropertyInfo propinfo = VProps.FirstOrDefault(p => p.Name == prop.Name);
                 if(propinfo != null)
                 {
-                    prop.SetValue(newT, propinfo.GetValue(VModel));
+                    if(propinfo.PropertyType.IsValueType && prop.PropertyType.IsValueType && prop.CanWrite)
+                        prop.SetValue(newT, propinfo.GetValue(VModel));
+                    else if(!propinfo.PropertyType.IsValueType && prop.PropertyType.IsValueType)
+                    {
+                        Type type = prop.GetType();
+                        PropertyInfo[] V2Props = type.GetProperties();
+                        foreach (PropertyInfo prop2 in V2Props)
+                        {
+                            PropertyInfo prop2info = V2Props.FirstOrDefault(p => p.Name == prop2.Name);
+                            if (prop2info != null)
+                            {
+                                if (prop2info.PropertyType.IsValueType && prop2.PropertyType.IsValueType && prop.CanWrite)
+                                    prop2.SetValue(newT, prop2info.GetValue(type));
+                            }
+                        }
+                    }
                 }
             }
 
             return newT;
         }
-
+        */
         public static List<VehicleDetailsViewModel> ConvertToVehicleDetailsModel(this IEnumerable<Vehicle> VModel)
         {
             List<VehicleDetailsViewModel> VDVModel = new List<VehicleDetailsViewModel>();
