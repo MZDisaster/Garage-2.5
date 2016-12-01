@@ -49,7 +49,10 @@
         @Html.ActionLink("Detailed list", "DetailedList")
 
     </div><!-- Controller End -->
-
+    <!--
+        
+    <select ng-options="x.Name for x in VehicleTypes"></select>
+    -->
     <!--@@Html.ActionLink("Create new Vehicle", "Create")-->
     <table class="table">
         <thead>
@@ -63,25 +66,19 @@
                 <th>
                     Type
                 </th>
-                <th>
-                    Color
-                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="v in Vehicles">
                 <td>
-                    {{v.OwnerName}}
+                    {{v.Owner}}
                 </td>
                 <td>
                     {{v.RegNr}}
                 </td>
                 <td>
                     {{v.VehicleType}}
-                </td>
-                <td>
-                    {{v.Color}}
                 </td>
                 <td>
                     <a href="/Edit/{{v.Id}}">Edit</a>
@@ -106,6 +103,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Create Vehicle</h4>
                         </div>
+                                    
                         <div class="modal-body">
                             <form id="CreateVehicleForm" name="CreateVehicleForm">
                                 <div class="form-group">
@@ -115,12 +113,12 @@
                                     <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
                                     <label for="Type">Type</label>
                                     <select name="Type" id="Type" ng-model="Vehicle.Type">
-                                        <option ng-repeat="t in VehicleTypes">{{t.Name}}</option>
+                                        <option>{{VehicleTypes[0].Name}}</option>
                                     </select>
                                     <label for="Owner">Owner</label>
                                     <input type="text" ng-model="OwnerSearch" class="form-control" />
-                                    <select name="Owner" id="Owner" ng-model="Vehicle.Owner">
-                                        <option ng-repeat="o in OwnersList">{{o.Name}}</option>
+                                    <select name="Owner" id="Owner" ng-model="Vehicle.Owner" ng-options="o.Name for o in OwnersList">
+                                        
                                     </select>
                                 </div>
                             </form>
