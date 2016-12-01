@@ -34,21 +34,33 @@ namespace Garage_2._5.Repositories
             tmplist.Add(GContext.Vehicles.Find(id));
             return Converter.ConvertToVehicleDetailsModel(tmplist).First();
         }
-
+        /// <summary>
+        /// Deprecated method for retrieving all Vehicles. Made obsolete by the addition of a Search-bar to the Index view
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<VehicleViewModel> GetVehicleList()
         {
             List<VehicleViewModel> VModelList = GContext.Vehicles.ConvertToVehicleViewModel();
 
             return VModelList.ToList();
         }
-
+        /// <summary>
+        /// Deprecated method for retrieving all vehicles. Made obsolete by the addition of a Search-bar to the DetailedList view
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<VehicleDetailsViewModel> GetVehiclesDetailsList()
         {
             List<VehicleDetailsViewModel> VDModelList = GContext.Vehicles.ConvertToVehicleDetailsModel();
 
             return VDModelList;
         }
-
+        /// <summary>
+        /// Retrieves Vehicles of a Type and with RegNr containing a string. If Type is set to 0 it gets all Types, if string is set to "" it gets all RegNrs.
+        /// Returns them as an IEnumerable of Vehicle View Models
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="RegNr"></param>
+        /// <returns></returns>
         public IEnumerable<VehicleViewModel> SearchInIndex(int Type, string RegNr)
         {
             List<VehicleViewModel> VModelList = GContext.Vehicles.Where(v =>
@@ -58,7 +70,12 @@ namespace Garage_2._5.Repositories
 
             return VModelList;
         }
-
+        /// <summary>
+        /// Retrieves Vehicles of a Type
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="RegNr"></param>
+        /// <returns></returns>
         public IEnumerable<VehicleDetailsViewModel> SearchInDetails(int Type, string RegNr)
         {
             List<VehicleDetailsViewModel> VModelList = GContext.Vehicles.Where(v =>
