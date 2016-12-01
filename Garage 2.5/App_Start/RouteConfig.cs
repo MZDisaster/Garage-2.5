@@ -18,6 +18,12 @@ namespace Garage_2._5
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "AngularRoute",
+                url: "{controller}/Routes/{action}/{id}",
+                defaults: new { controller = "Home", action = "CreateVehicle", id = UrlParameter.Optional }
+            );
         }
     }
 }

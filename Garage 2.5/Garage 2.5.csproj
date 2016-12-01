@@ -166,8 +166,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Garage\controllers\IndexController.js" />
+    <Content Include="Garage\controllers\ModalController.js" />
     <Content Include="Garage\Garage.js" />
+    <Content Include="Garage\services\GetOwnerList.js" />
     <Content Include="Garage\services\GetVehicleList.js" />
+    <Content Include="Garage\services\GetVehicleTypes.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -968,6 +971,7 @@
     <Content Include="Views\Home\TypeDetails.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\Routes\CreateVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -984,7 +988,6 @@
   <ItemGroup>
     <Folder Include="Garage\directives\" />
     <Folder Include="Garage\filters\" />
-    <Folder Include="Views\Home\Routes\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
