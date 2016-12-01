@@ -66,19 +66,25 @@
                 <th>
                     Type
                 </th>
+                <th>
+                    Color
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="v in Vehicles">
                 <td>
-                    {{v.Owner}}
+                    {{v.OwnerName}}
                 </td>
                 <td>
                     {{v.RegNr}}
                 </td>
                 <td>
                     {{v.VehicleType}}
+                </td>
+                <td>
+                    {{v.Color}}
                 </td>
                 <td>
                     <a href="/Edit/{{v.Id}}">Edit</a>
@@ -126,7 +132,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
                         </div>
                     </div>
                 </div>
