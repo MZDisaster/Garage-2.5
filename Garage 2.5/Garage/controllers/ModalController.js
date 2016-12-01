@@ -43,13 +43,15 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
 
     $scope.checkData = function () {
         console.log('check:');
-        console.log($scope.OwnersList);
+        console.log($scope.Vehicle);
     };
 
     var CreateVehicle = function () {
-        if ($scope.CreateVehicleForm.$valid) {
-            Creator.Vehicle($scope.Vehicle);
-        }
+        //if ($scope.CreateVehicleForm.$valid) {
+        Creator.Vehicle($scope.Vehicle).then(function (data) {
+            console.log(data);
+        });
+        //}
     };
 
     var CreateOwner = function () {
