@@ -45,15 +45,21 @@
     <h2>Index</h2>
 
     <div ng-controller="ModalController"> <!-- Controller -->
-        <a class="btn btn-default" ng-click='Open("CreateVehicle")'>Create Vehicle</a>
-        @Html.ActionLink("Detailed list", "DetailedList")
-
+        <a class="btn btn-default" ng-click='Open("1")'>Create Vehicle</a>
+        <a class="btn btn-default" ng-click='Open("2")'>Create Owner</a>
     </div><!-- Controller End -->
     <!--
         
     <select ng-options="x.Name for x in VehicleTypes"></select>
     -->
     <!--@@Html.ActionLink("Create new Vehicle", "Create")-->
+    <select ng-model="VehicleTypeFilter" class="input-sm">
+        <option selected value="">All</option>
+        <option ng-repeat="type in VehicleTypes" value="{{type.Name}}">
+            {{type.Name}}
+        </option>
+    </select>
+    <input type="text" ng-model="SearchFilter" class="form-control" placeholder="Search" />
     <table class="table">
         <thead>
             <tr>
@@ -73,7 +79,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="v in Vehicles">
+            <tr ng-repeat="v in Vehicles | filter:SearchFilter | filter:VehicleTypeFilter">
                 <td>
                     {{v.OwnerName}}
                 </td>
@@ -100,8 +106,8 @@
 <!-- Change after layout design -->
 <!-- Basic modal support -->
 <div ng-controller="ModalController"> <!-- Controller -->
-    <div ng-switch="ModalTemplate">
-        <div ng-switch-when="CreateVehicle">
+    <div ng-switch on="ModalTemplate">
+        <div ng-switch-when="1">
             <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -109,7 +115,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Create Vehicle</h4>
                         </div>
-                                    
+                        
                         <div class="modal-body">
                             <form id="CreateVehicleForm" name="CreateVehicleForm">
                                 <div class="form-group">
@@ -124,6 +130,43 @@
                                     <label for="Owner">Owner</label>
                                     <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
                                     <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR" >
+                                        <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <button ng-click="checkData()">check</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-switch-when="2">
+            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Create Owner</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="CreateVehicleForm" name="CreateVehicleForm">
+                                <div class="form-group">
+                                    <label for="RegNr">Registration Number</label>
+                                    <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
+                                    <label for="Color">Color</label>
+                                    <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
+                                    <label for="Type">Type</label>
+                                    <select name="Type" id="Type" ng-model="Vehicle.VehicleTypeId">
+                                        <option ng-repeat="type in VehicleTypes" value="{{type.TypeId}}">{{type.Name}}</option>
+                                    </select>
+                                    <label for="Owner">Owner</label>
+                                    <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
+                                    <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR">
                                         <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
                                     </select>
                                 </div>
