@@ -3,6 +3,7 @@ Garage.controller('IndexController', ['$scope', 'GetVehicleList', function ($sco
     console.log('index controller loaded');
 
     $scope.Vehicles = {};
+
     GetVehicleList.then(function (data) {
         $scope.Vehicles = data;
     });

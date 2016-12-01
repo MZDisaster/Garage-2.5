@@ -126,5 +126,10 @@ namespace Garage_2._5.Repositories
             GContext.Vehicles.Remove(vehicle);
             GContext.SaveChanges();
         }
+
+        public IEnumerable<Owner> GetOwners()
+        {
+            return GContext.Set<Owner>();
+        }
     }
 }

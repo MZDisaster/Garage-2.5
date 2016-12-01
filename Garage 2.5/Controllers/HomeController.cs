@@ -20,6 +20,7 @@ namespace Garage_2._5.Controllers
         public ActionResult Index()
         {
             return View();
+        
         }
 
         public JsonResult getIndex(int VehicleTypeId = 0, string RegNr = "")
@@ -35,6 +36,11 @@ namespace Garage_2._5.Controllers
             var result = JsonConvert.SerializeObject(Repo.SearchInIndex(VehicleTypeId, RegNr), Formatting.Indented, jss);
             return Json(result, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public ActionResult CreateVehicle()
+        {
+            return View("CreateVehicle");
         }
 
         public ActionResult DetailedList (int VehicleTypeId = 0, string RegNr = "")
@@ -175,6 +181,12 @@ namespace Garage_2._5.Controllers
         {
             Repo.RemoveVehicle(id);          
             return RedirectToAction("Index");
+        }
+
+        public JsonResult GetOwners()
+        {
+            var result = JsonConvert.SerializeObject(Repo.GetOwners(), Formatting.Indented, jss);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
     }

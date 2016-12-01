@@ -3,6 +3,23 @@
 @{
     ViewBag.Title = "Index";
 }
+
+<!--
+    Controllers:
+        IndexController:
+            $scope Variables:
+                "Vehicles" (object from Action: getIndex Controller: Home)
+
+        ModalController:
+            $scope Variables:
+                "ModalTemplate" (to select wich Template should be viewed to the user(Should be changed when planning the layout))
+                "OwnersList" (Object from Action: GetOwners Controller Home)
+                "VehicleTypes" (Obejct from Action: GetVehicleTypes Controller Home)
+
+
+-->
+
+
 <!--@@using (Ajax.BeginForm("Index", null, new AjaxOptions
                                 {
                                     InsertionMode = InsertionMode.Replace,
@@ -17,13 +34,18 @@
         @@Html.DropDownList("VehicleTypeId")
     </div>
 }-->
-<div id="OurTableDiv" ng-controller="IndexController">
+
+
+<div id="OurTableDiv" ng-controller="IndexController"><!-- Controller -->
     <h2>Index</h2>
 
-    <p>
+    <div ng-controller="ModalController">
+        <a class="btn btn-default" ng-click='Open("CreateVehicle")'>Create Vehicle</a>
         @Html.ActionLink("Detailed list", "DetailedList")
-        @Html.ActionLink("Create new Vehicle", "Create")
-    </p>
+
+    </div>
+
+    <!--@@Html.ActionLink("Create new Vehicle", "Create")-->
     <table class="table">
         <thead>
             <tr>
@@ -58,4 +80,61 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div><!-- Controller End -->
+
+<div ng-controller="ModalController"> <!-- Controller -->
+    <div ng-switch="ModalTemplate">
+        <div ng-switch-when="CreateVehicle">
+            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Create Vehicle</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="CreateVehicleForm">
+                                <div class="form-group">
+                                    <label for="RegNr">Registration Number</label>
+                                    <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
+                                    <label for="Color">Color</label>
+                                    <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
+                                    <label for="Type">Type</label>
+                                    <select name="Type" id="Type" ng-model="Vehicle.Type"></select>
+                                    <label for="Owner">Owner</label>
+                                    <input type="text" ng-model="OwnerSearch" class="form-control" />
+                                    <select name="Owner" id="Owner" ng-model="Vehicle.Owner">
+                                        <option ng-repeat="o in OwnersList">{{o.Name}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-switch-default>
+            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Default and user shouldn't see this {{ModalTemplate}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Controller End -->
