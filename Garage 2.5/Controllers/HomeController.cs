@@ -17,7 +17,12 @@ namespace Garage_2._5.Controllers
 
         // var result = JsonConvert.SerializeObject((repo result), Formatting.Indented, jss);
 
-        public ActionResult Index(int VehicleTypeId = 0, string RegNr = "")
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult getIndex(int VehicleTypeId = 0, string RegNr = "")
         {
             List<SelectListItem> types = new List<SelectListItem>();
             types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
@@ -26,8 +31,10 @@ namespace Garage_2._5.Controllers
                 types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
             }
             ViewBag.VehicleTypeId = types;
-            if (Request.IsAjaxRequest()) return PartialView("Index", Repo.SearchInIndex(VehicleTypeId, RegNr));
-            return View(Repo.SearchInIndex(VehicleTypeId, RegNr));
+
+            var result = JsonConvert.SerializeObject(Repo.SearchInIndex(VehicleTypeId, RegNr), Formatting.Indented, jss);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult DetailedList (int VehicleTypeId = 0, string RegNr = "")

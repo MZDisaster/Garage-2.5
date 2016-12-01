@@ -28,9 +28,10 @@ namespace Garage_2._5
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                "~/Scripts/angular.js",
-                "~/Scripts/angular-route.js",
-                "~/Scripts/angular-*"));
+                "~/Scripts/angular.min.js",
+                "~/Scripts/angular-route.min.js",
+                "~/Scripts/angular-resource.min.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/garage").Include(
                 "~/Garage/*.js",

@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" ng-app="Garage" ng-cloak>
         @RenderBody()
         <hr />
         <footer>
@@ -37,6 +37,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/garage")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -165,16 +165,18 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Garage\controllers\IndexController.js" />
+    <Content Include="Garage\Garage.js" />
+    <Content Include="Garage\services\GetVehicleList.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.min.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-message-format.min.js" />
     <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\aagangular-mocks.js" />
     <Content Include="Scripts\angular-parse-ext.min.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -980,10 +982,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Garage\controllers\" />
     <Folder Include="Garage\directives\" />
     <Folder Include="Garage\filters\" />
-    <Folder Include="Garage\services\" />
     <Folder Include="Views\Home\Routes\" />
   </ItemGroup>
   <PropertyGroup>
