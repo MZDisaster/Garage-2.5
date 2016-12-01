@@ -34,6 +34,17 @@ namespace Garage_2._5.Controllers
             return View("CreateVehicle");
         }
 
+        [HttpPost]
+        public JsonResult CreateVehicle(VehicleCreateViewModel V)
+        {
+            if(ModelState.IsValid)
+            {
+                Repo.AddVehicle(V);
+                return Json(new {Status="success"});
+            }
+            return Json(new { Status = "fail" });
+        }
+
         public ActionResult DetailedList (int VehicleTypeId = 0, string RegNr = "")
         {
             List<SelectListItem> types = new List<SelectListItem>();
