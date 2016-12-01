@@ -8,7 +8,6 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
     $scope.OwnersList = {};
     $scope.Vehicles = {};
 
-
     $scope.Vehicle = {
         RegNr: '',
         Color: '',
@@ -31,12 +30,14 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
 
     GetVehicleTypes.then(function (data) {
         $scope.VehicleTypes = data;
+        $scope.defaultSelectedType = $scope.VehicleTypes[0].Name;
     });
 
     GetOwnerList.then(function (data) {
         console.log('Owners Loaded from server:');
         console.log(data);
         $scope.OwnersList = data;
+        $scope.defaultSelectedOwner = $scope.OwnersList[0].Name;
     });
 
     $scope.checkData = function () {
