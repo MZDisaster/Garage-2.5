@@ -168,6 +168,7 @@
     <Content Include="Garage\controllers\IndexController.js" />
     <Content Include="Garage\controllers\ModalController.js" />
     <Content Include="Garage\Garage.js" />
+    <Content Include="Garage\services\Creator.js" />
     <Content Include="Garage\services\GetOwnerList.js" />
     <Content Include="Garage\services\GetVehicleList.js" />
     <Content Include="Garage\services\GetVehicleTypes.js" />

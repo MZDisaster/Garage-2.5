@@ -16,7 +16,11 @@
                 "ModalTemplate" (to select wich Template should be viewed to the user(Should be changed when planning the layout))
                 "OwnersList" (Object from Action: GetOwners Controller Home)
                 "VehicleTypes" (Obejct from Action: GetVehicleTypes Controller Home)
-
+                "Vehicle" (Vehicle Object to be created)
+                "Owner" (Owner Object to be created)
+            $scope functions
+                CreateVehicle() (posts the "Vehicle" object into /Home/CreateVehicle )
+                CreateOwner() (posts the "Owner" object into /Home/CreateOwner )
 
 -->
 
@@ -101,7 +105,7 @@
                         </div>
                                     
                         <div class="modal-body">
-                            <form id="CreateVehicleForm">
+                            <form id="CreateVehicleForm" name="CreateVehicleForm">
                                 <div class="form-group">
                                     <label for="RegNr">Registration Number</label>
                                     <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
@@ -118,6 +122,7 @@
                                     </select>
                                 </div>
                             </form>
+                            <button ng-click="checkData()">check</button>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

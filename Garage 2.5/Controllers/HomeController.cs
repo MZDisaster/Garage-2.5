@@ -25,17 +25,8 @@ namespace Garage_2._5.Controllers
 
         public JsonResult getIndex(int VehicleTypeId = 0, string RegNr = "")
         {
-            List<SelectListItem> types = new List<SelectListItem>();
-            types.Add(new SelectListItem() { Text = "All Types", Value = "0" });
-            foreach (VehicleType type in Repo.GContext.VehicleTypes)
-            {
-                types.Add(new SelectListItem() { Text = type.Name, Value = type.TypeId.ToString() });
-            }
-            ViewBag.VehicleTypeId = types;
-
-            var result = JsonConvert.SerializeObject(Repo.SearchInIndex(VehicleTypeId, RegNr), Formatting.Indented, jss);
+            var result = JsonConvert.SerializeObject(Repo.SearchInDetails(VehicleTypeId, RegNr), Formatting.Indented, jss);
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult CreateVehicle()
