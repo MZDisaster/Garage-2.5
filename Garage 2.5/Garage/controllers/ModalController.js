@@ -2,9 +2,6 @@
 
 Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetVehicleTypes', function ($scope, GetOwnerList, Creator, GetVehicleTypes) {
     console.log('ModalController loaded');
-
-    var VM = this;
-
     $scope.ModalTemplate = 'CreateVehicle';
 
     $scope.VehicleTypes = {};
@@ -15,7 +12,8 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
         RegNr: '',
         Color: '',
         OwnerPNR: '',
-        VehicleTypeId: ''
+        VehicleTypeId: '',
+        
     };
 
     $scope.Owner = {
@@ -45,22 +43,19 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
 
     $scope.checkData = function () {
         console.log('check:');
-        console.log($scope.Vehicle);
-    }
+        console.log($scope.OwnersList);
+    };
 
-    $scope.CreateVehicle = function () {
+    var CreateVehicle = function () {
         if ($scope.CreateVehicleForm.$valid) {
-            var response = {};
-            Creator.Vehicle(VM.$scope.Vehicle).then(function (data) {
-                response = data;
-            });
-            $console.log(response);
-        }
-    }
-
-    $scope.CreateOwner = function () {
-        if (CreateOwnerForm.$valid) {
-            Creator.Owner(Owner);
+            Creator.Vehicle($scope.Vehicle);
         }
     };
+
+    var CreateOwner = function () {
+        if ($scope.CreateOwnerForm.$valid) {
+            Creator.Owner($scope.Owner);
+        }
+    };
+    $scope.CreateVehicle = CreateVehicle;
 }])

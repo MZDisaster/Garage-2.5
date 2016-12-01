@@ -58,7 +58,7 @@
         <thead>
             <tr>
                 <th>
-                    Name
+                    Owner
                 </th>
                 <th>
                     RegNr
@@ -118,12 +118,12 @@
                                     <label for="Color">Color</label>
                                     <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
                                     <label for="Type">Type</label>
-                                    <select name="Type" id="Type" ng-model="Vehicle.Type">
-                                        <option>{{VehicleTypes[0].Name}}</option>
+                                    <select name="Type" id="Type" ng-model="Vehicle.TypeId">
+                                        <option ng-repeat="type in VehicleTypes" value="type.Id">{{type.Name}}</option>
                                     </select>
                                     <label for="Owner">Owner</label>
-                                    <input type="text" ng-model="OwnerSearch" class="form-control" />
-                                    <select name="Owner" id="Owner" ng-model="Vehicle.Owner" ng-options="o.Name for o in OwnersList">
+                                    <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
+                                    <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR" ng-options="o.Name for o in OwnersList track by o.PNR" >
                                         
                                     </select>
                                 </div>
