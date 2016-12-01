@@ -26,6 +26,19 @@ namespace Garage_2._5
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/garage").Include(
+                "~/Garage/*.js",
+                "~/Garage/services/*.js",
+                "~/Garage/directives/*.js",
+                "~/Garage/filters/*.js",
+                "~/Garage/controllers/*.js"
+                ));
         }
     }
 }
