@@ -1,12 +1,11 @@
 ﻿
 
 Garage.controller('ModalController', ['$scope', 'GetOwnerList', function ($scope, GetOwnerList) {
-
+    console.log('ModalController loaded');
     $scope.ModalTemplate = 'CreateVehicle';
 
     $scope.Open = function (ModalName) {
-        console.log('Modal Should Open:');
-        console.log(ModalName);
+        console.log('Modal Should Open:\n' + ModalName);
         $scope.ModalTemplate = ModalName;
         jQuery('.ModalContainer').modal('toggle');
         parseData();
@@ -17,7 +16,8 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', function ($scope
             case "CreateVehicle": {
                 (function () {
                     GetOwnerList.then(function (data) {
-                        console.log('data should be set to OwnersList');
+                        console.log('Owners Loaded from server:');
+                        console.log(data);
                         $scope.OwnersList = data;
                     });
                 })()

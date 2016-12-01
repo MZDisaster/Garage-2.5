@@ -131,5 +131,10 @@ namespace Garage_2._5.Repositories
         {
             return GContext.Set<Owner>();
         }
+
+        public IEnumerable<VehicleType> GetVehicleTypes()
+        {
+            return GContext.Set<VehicleType>();
+        }
     }
 }

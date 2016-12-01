@@ -9,7 +9,8 @@
         IndexController:
             $scope Variables:
                 "Vehicles" (object from Action: getIndex Controller: Home)
-
+                "VehicleTypes" (object from Action: getVehicleTypes Controller: Home)
+                
         ModalController:
             $scope Variables:
                 "ModalTemplate" (to select wich Template should be viewed to the user(Should be changed when planning the layout))
@@ -39,11 +40,11 @@
 <div id="OurTableDiv" ng-controller="IndexController"><!-- Controller -->
     <h2>Index</h2>
 
-    <div ng-controller="ModalController">
+    <div ng-controller="ModalController"> <!-- Controller -->
         <a class="btn btn-default" ng-click='Open("CreateVehicle")'>Create Vehicle</a>
         @Html.ActionLink("Detailed list", "DetailedList")
 
-    </div>
+    </div><!-- Controller End -->
 
     <!--@@Html.ActionLink("Create new Vehicle", "Create")-->
     <table class="table">
@@ -82,6 +83,9 @@
     </table>
 </div><!-- Controller End -->
 
+
+<!-- Change after layout design -->
+<!-- Basic modal support -->
 <div ng-controller="ModalController"> <!-- Controller -->
     <div ng-switch="ModalTemplate">
         <div ng-switch-when="CreateVehicle">

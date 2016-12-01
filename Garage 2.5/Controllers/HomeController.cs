@@ -189,5 +189,11 @@ namespace Garage_2._5.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetVehicleTypes()
+        {
+            var result = JsonConvert.SerializeObject(Repo.GetVehicleTypes(), Formatting.Indented, jss);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
