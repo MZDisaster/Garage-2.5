@@ -7,7 +7,7 @@ Garage.controller('IndexController', ['$scope', 'GetVehicleList', 'GetVehicleTyp
     $scope.VehicleTypes = {};
 
     GetVehicleTypes.then(function (data) {
-        Console.log('VehicleTypes loaded from server');
+        console.log('VehicleTypes loaded from server');
         console.log(data);
         $scope.VehicleTypes = data;
     });
