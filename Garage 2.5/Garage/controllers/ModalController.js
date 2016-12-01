@@ -13,7 +13,8 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
         RegNr: '',
         Color: '',
         OwnerPNR: '',
-        VehicleTypeId: ''
+        VehicleTypeId: '',
+        
     };
 
     $scope.Owner = {
@@ -42,17 +43,18 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
     $scope.checkData = function () {
         console.log('check:');
         console.log($scope.OwnersList);
-    }
+    };
 
     var CreateVehicle = function () {
         if ($scope.CreateVehicleForm.$valid) {
             Creator.Vehicle($scope.Vehicle);
         }
-    }
+    };
 
     var CreateOwner = function () {
         if ($scope.CreateOwnerForm.$valid) {
             Creator.Owner($scope.Owner);
         }
     };
+    $scope.CreateVehicle = CreateVehicle;
 }])
