@@ -1,12 +1,12 @@
 ﻿
 
-Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetVehicleTypes', function ($scope, GetOwnerList, Creator, GetVehicleTypes) {
+Garage.controller('ModalController', ['$scope', '$rootScope', 'GetOwnerList', 'Creator', 'GetVehicleTypes', function ($scope, $rootScope, GetOwnerList, Creator, GetVehicleTypes) {
     console.log('ModalController loaded');
-    $scope.ModalTemplate = 'CreateVehicle';
+    $scope.ModalTemplate = '1';
 
-    $scope.VehicleTypes = {};
-    $scope.OwnersList = {};
-    $scope.Vehicles = {};
+    $scope.VehicleTypes = [];
+    $scope.OwnersList = [];
+    $scope.Vehicles = [];
 
     $scope.Vehicle = {
         RegNr: '',
@@ -43,21 +43,31 @@ Garage.controller('ModalController', ['$scope', 'GetOwnerList', 'Creator', 'GetV
 
     $scope.checkData = function () {
         console.log('check:');
-        console.log($scope.Vehicle);
+        console.log($scope.ModalTemplate);
     };
 
-    var CreateVehicle = function () {
+    $scope.CreateVehicle = function () {
         //if ($scope.CreateVehicleForm.$valid) {
         Creator.Vehicle($scope.Vehicle).then(function (data) {
+            if (data.Status == "success")
+            {
+                $rootScope.$emit('VehiclesChanged');
+                console.log('Should broadcast');
+            }
+                
             console.log(data);
         });
         //}
     };
 
-    var CreateOwner = function () {
-        if ($scope.CreateOwnerForm.$valid) {
-            Creator.Owner($scope.Owner);
-        }
+    $scope.CreateOwner = function () {
+        //if ($scope.CreateOwnerForm.$valid) {
+
+        Creator.Owner($scope.Owner).then(function (data) {
+            console.log(data);
+        });
+        //}
     };
-    $scope.CreateVehicle = CreateVehicle;
+    //$scope.CreateVehicle = CreateVehicle;
+
 }])
