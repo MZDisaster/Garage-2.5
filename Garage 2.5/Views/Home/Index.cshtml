@@ -10,7 +10,7 @@
             $scope Variables:
                 "Vehicles" (object from Action: getIndex Controller: Home)
                 "VehicleTypes" (object from Action: getVehicleTypes Controller: Home)
-                
+
         ModalController:
             $scope Variables:
                 "ModalTemplate" (to select wich Template should be viewed to the user(Should be changed when planning the layout))
@@ -23,8 +23,6 @@
                 CreateOwner() (posts the "Owner" object into /Home/CreateOwner )
 
 -->
-
-
 <!--@@using (Ajax.BeginForm("Index", null, new AjaxOptions
                                 {
                                     InsertionMode = InsertionMode.Replace,
@@ -41,15 +39,174 @@
 }-->
 
 
-<div id="OurTableDiv" ng-controller="IndexController"><!-- Controller -->
-    <h2>Index</h2>
+<div id="OurTableDiv" ng-controller="IndexController as iCtrl">
+    <!-- Controller -->
+    <h2>Index</h2>Delete:{{DeleteVehicle.VehicleId}}
 
-    <div ng-controller="ModalController"> <!-- Controller -->
+
+
+    <div ng-controller="ModalController as mCtrl">
+        <!-- Controller -->
         <a class="btn btn-default" ng-click='Open("1")'>Create Vehicle</a>
         <a class="btn btn-default" ng-click='Open("2")'>Create Owner</a>
-    </div><!-- Controller End -->
-    <!--
         
+        <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div ng-switch on="ModalTemplate">
+                <div ng-switch-when="1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Create Vehicle</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="CreateVehicleForm" name="CreateVehicleForm">
+                                    <div class="form-group">
+                                        <label for="Vehicle.RegNr">Registration Number</label>
+                                        <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
+                                        <label for="Color">Color</label>
+                                        <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
+                                        <label for="Type">Type</label>
+                                        <select name="Type" id="Type" ng-model="Vehicle.VehicleTypeId">
+                                            <option ng-repeat="type in VehicleTypes" value="{{type.TypeId}}">{{type.Name}}</option>
+                                        </select>
+                                        <label for="Owner">Owner</label>
+                                        <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
+                                        <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR">
+                                            <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <button ng-click="checkData()">check</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-when="2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Create Owner</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="CreateVehicleForm" name="CreateVehicleForm">
+                                    <div class="form-group">
+                                        <label for="RegNr">Person Number</label>
+                                        <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
+                                        <label for="Color">Name</label>
+                                        <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
+
+                                    </div>
+                                </form>
+                                <button ng-click="checkData()">check</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-when="3">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Edit Vehicle</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="EditVehicleForm" name="EditVehicleForm">
+                                    <div class="form-group">
+                                        <label for="EditVehicle.RegNr">Registration Number</label>
+                                        <input type="text" name="RegNr" id="RegNr" ng-model="EditVehicle.RegNr" class="form-control" />
+                                        <label for="EditVehicle.Color">Color</label>
+                                        <input type="text" name="Color" id="Color" ng-model="EditVehicle.Color" class="form-control" />
+                                        <label for="EditVehicle.TypeId">Type</label>
+                                        <select name="Type" id="Type" ng-model="EditVehicle.TypeId">
+                                            <option ng-repeat="type in VehicleTypes" ng-selected="EditVehicle.TypeId == type.TypeId"value="{{type.TypeId}}">{{type.Name}}</option>
+                                        </select>
+                                        <label for="EditVehicle.PNR">Owner</label>
+                                        <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
+                                        <select name="Owner" id="Owner" ng-model="EditVehicle.PNR">
+                                            <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <button ng-click="checkData()">check</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="EditTheVehicle()">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-when="4">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Delete Vehicle</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="EditVehicleForm" name="EditVehicleForm">
+                                    <div class="form-group">
+                                        <h5>Are you sure you want to delete this Vehicle? {{DeleteVehicle.VehicleId}}</h5>
+                                        <label for="DeleteVehicle.RegNr">Registration Number</label>
+                                        {{DeleteVehicle.RegNr}}
+                                        <label for="DeleteVehicle.Color">Color</label>
+                                        {{DeleteVehicle.Color}}
+                                        <label for="DeleteVehicle.TypeId">Type</label>
+                                        {{GetDeleteTypeName(DeleteVehicle.TypeId)}}
+                                        <label for="DeleteVehicle.PNR">Owner</label>
+                                        {{GetDeleteOwnerName(DeleteVehicle.PNR)}}
+                                        <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
+                                        
+                                    </div>
+                                </form>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="DeleteTheVehicle()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-switch-default>
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Default and user shouldn't see this {{ModalTemplate}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--
+
     <select ng-options="x.Name for x in VehicleTypes"></select>
     -->
     <!--@@Html.ActionLink("Create new Vehicle", "Create")-->
@@ -63,6 +220,9 @@
     <table class="table">
         <thead>
             <tr>
+                <th>
+                    Id
+                </th>
                 <th>
                     Owner
                 </th>
@@ -79,7 +239,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="v in Vehicles | filter:SearchFilter | filter:VehicleTypeFilter">
+            <tr ng-repeat="v in $parent.Vehicles | filter:SearchFilter | filter:VehicleTypeFilter">
+                <td>
+                    {{v.Id}}
+                </td>
                 <td>
                     {{v.OwnerName}}
                 </td>
@@ -92,113 +255,12 @@
                 <td>
                     {{v.Color}}
                 </td>
-                <td>
-                    <a href="/Edit/{{v.Id}}">Edit</a>
-                    <a href="/Details/{{v.Id}}">Details</a>
-                    <a href="/Delete/{{v.Id}}">Delete</a>
-                </td>
+                <td><a class="btn btn-default" ng-click="SetEditVehicle($parent.GetEditVehicle(v.Id)); Open(3)">Edit</a> |
+                    <a class="btn btn-default" ng-click="SetDeleteVehicle($parent.GetDeleteVehicle(v.Id)); Open(4)">Delete</a> </td>
             </tr>
         </tbody>
     </table>
+    </div><!-- Controller End -->
 </div><!-- Controller End -->
-
-
 <!-- Change after layout design -->
 <!-- Basic modal support -->
-<div ng-controller="ModalController"> <!-- Controller -->
-    <div ng-switch on="ModalTemplate">
-        <div ng-switch-when="1">
-            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Create Vehicle</h4>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <form id="CreateVehicleForm" name="CreateVehicleForm">
-                                <div class="form-group">
-                                    <label for="Vehicle.RegNr">Registration Number</label>
-                                    <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
-                                    <label for="Color">Color</label>
-                                    <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
-                                    <label for="Type">Type</label>
-                                    <select name="Type" id="Type" ng-model="Vehicle.VehicleTypeId">
-                                        <option ng-repeat="type in VehicleTypes" value="{{type.TypeId}}">{{type.Name}}</option>
-                                    </select>
-                                    <label for="Owner">Owner</label>
-                                    <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
-                                    <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR" >
-                                        <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
-                                    </select>
-                                </div>
-                            </form>
-                            <button ng-click="checkData()">check</button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-switch-when="2">
-            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Create Owner</h4>
-                        </div>
-
-                        <div class="modal-body">
-                            <form id="CreateVehicleForm" name="CreateVehicleForm">
-                                <div class="form-group">
-                                    <label for="RegNr">Registration Number</label>
-                                    <input type="text" name="RegNr" id="RegNr" ng-model="Vehicle.RegNr" class="form-control" />
-                                    <label for="Color">Color</label>
-                                    <input type="text" name="Color" id="Color" ng-model="Vehicle.Color" class="form-control" />
-                                    <label for="Type">Type</label>
-                                    <select name="Type" id="Type" ng-model="Vehicle.VehicleTypeId">
-                                        <option ng-repeat="type in VehicleTypes" value="{{type.TypeId}}">{{type.Name}}</option>
-                                    </select>
-                                    <label for="Owner">Owner</label>
-                                    <!--<input type="text" ng-model="OwnerSearch" class="form-control" />-->
-                                    <select name="Owner" id="Owner" ng-model="Vehicle.OwnerPNR">
-                                        <option ng-repeat="o in OwnersList track by o.PNR" value="{{o.PNR}}">{{o.Name}}</option>
-                                    </select>
-                                </div>
-                            </form>
-                            <button ng-click="checkData()">check</button>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="CreateVehicle()">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-switch-default>
-            <div class="modal fade ModalContainer" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Default and user shouldn't see this {{ModalTemplate}}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!-- Controller End -->

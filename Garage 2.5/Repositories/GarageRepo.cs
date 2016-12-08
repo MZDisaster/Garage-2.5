@@ -50,7 +50,7 @@ namespace Garage_2._5.Repositories
         /// <returns></returns>
         public IEnumerable<VehicleDetailsViewModel> GetVehiclesDetailsList()
         {
-            List<VehicleDetailsViewModel> VDModelList = GContext.Vehicles.ConvertToVehicleDetailsModel();
+            List<VehicleDetailsViewModel> VDModelList = GContext.Vehicles.ToList().ConvertToVehicleDetailsModel();
 
             return VDModelList;
         }
@@ -137,11 +137,19 @@ namespace Garage_2._5.Repositories
             
         }
 
-        public void RemoveVehicle(int id)
+        public bool RemoveVehicle(int id)
         {
-            Vehicle vehicle = GContext.Vehicles.Find(id);
-            GContext.Vehicles.Remove(vehicle);
-            GContext.SaveChanges();
+            try
+            {
+                Vehicle vehicle = GContext.Vehicles.Find(id);
+                GContext.Vehicles.Remove(vehicle);
+                GContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<Owner> GetOwners()

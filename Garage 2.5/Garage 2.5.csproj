@@ -973,6 +973,8 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\Routes\CreateVehicle.cshtml" />
+    <Content Include="Views\Home\Routes\Edit.cshtml" />
+    <Content Include="Views\Home\Routes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

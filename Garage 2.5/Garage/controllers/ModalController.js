@@ -4,9 +4,9 @@ Garage.controller('ModalController', ['$scope', '$rootScope', 'GetOwnerList', 'C
     console.log('ModalController loaded');
     $scope.ModalTemplate = '1';
 
-    $scope.VehicleTypes = [];
     $scope.OwnersList = [];
-    $scope.Vehicles = [];
+    $scope.VehicleTypes = [];
+    
 
     $scope.Vehicle = {
         RegNr: '',
@@ -21,6 +21,32 @@ Garage.controller('ModalController', ['$scope', '$rootScope', 'GetOwnerList', 'C
         Name: ''
     };
 
+    $scope.EditVehicle = {
+        VehicleId: '',
+        RegNr: '',
+        Color: '',
+        PNR: '',
+        TypeId: 1,
+        Owner: {},
+        VehicleType: {}
+    }
+    $scope.DeleteVehicle = {
+        VehicleId: '',
+        RegNr: '',
+        Color: '',
+        PNR: '',
+        TypeId: '',
+        Owner: {},
+        VehicleType: {}
+    }
+    $scope.GetDeleteOwnerName = function(id)
+    {
+        return $scope.OwnersList.sort(function (a, b) { if (a.PNR === id) { return -1 } if (b.PNR === id) { return 1 } return 0 })[0].Name;
+    }
+    $scope.GetDeleteTypeName = function(id)
+    {
+        return $scope.VehicleTypes.sort(function (a, b) { if (a.TypeId === id) { return -1 } if (b.TypeId === id) { return 1 } return 0 })[0].Name;
+    }
 
     $scope.Open = function (ModalName) {
         console.log('Modal Should Open:\n' + ModalName);
@@ -51,14 +77,66 @@ Garage.controller('ModalController', ['$scope', '$rootScope', 'GetOwnerList', 'C
         Creator.Vehicle($scope.Vehicle).then(function (data) {
             if (data.Status == "success")
             {
-                $rootScope.$emit('VehiclesChanged');
                 console.log('Should broadcast');
-            }
-                
+                $rootScope.$broadcast('VehiclesChanged', null);
+                $scope.Vehicle = {
+                    RegNr: '',
+                    Color: '',
+                    OwnerPNR: '',
+                    VehicleTypeId: '',
+
+                };
+            }           
             console.log(data);
         });
+        
         //}
     };
+    $scope.SetEditVehicle = function(editv)
+    {
+        if (editv != null)
+        {
+            $scope.EditVehicle.TypeId = (editv.VehicleType == "Car" ? 1 : (editv.VehicleType == "Boat" ? 2 : (editv.VehicleType == "Truck" ? 3 : 4)));
+            console.log(editv.VehicleType);
+            $scope.EditVehicle.VehicleId = editv.Id;
+            $scope.EditVehicle.Color = editv.Color;
+            $scope.EditVehicle.RegNr = editv.RegNr;
+            $scope.EditVehicle.PNR = editv.PNR;
+            
+        }
+        
+    }
+    $scope.SetDeleteVehicle = function(delv)
+    {
+        if (delv != null)
+        {
+            $scope.DeleteVehicle.VehicleId = delv.Id;
+            $scope.DeleteVehicle.Color =     delv.Color;
+            $scope.DeleteVehicle.RegNr =     delv.RegNr;
+            $scope.DeleteVehicle.PNR =       delv.PNR;
+            $scope.DeleteVehicle.TypeId =   (delv.VehicleType == "Car") ? 1 : (delv.VehicleType == "Boat") ? 2 : (delv.VehicleType == "Truck") ? 3 : 4;
+        }
+    }
+    $scope.EditTheVehicle = function () {
+        Creator.EditVehicle($scope.EditVehicle).then(function (data) {
+            if (data.Status == "success")
+            {
+                $rootScope.$broadcast('VehiclesChanged',null);
+                console.log('Edited vehicle');
+            }
+            console.log(data);
+        })
+    }
+    $scope.DeleteTheVehicle = function () {
+        Creator.DeleteVehicle($scope.DeleteVehicle).then(function (data) {
+            if (data.Status == "success")
+            {
+                console.log('Deleted Vehicle');
+                $rootScope.$broadcast('VehicleDeleted',null);
+            }
+            console.log(data);
+        })
+    }
 
     $scope.CreateOwner = function () {
         //if ($scope.CreateOwnerForm.$valid) {

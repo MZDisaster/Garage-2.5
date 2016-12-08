@@ -100,6 +100,11 @@ namespace Garage_2._5.Conversions
             return VModel;
 
         }
-
+        //public static Vehicle ConvertToVehicleFromDetailsModel(this VehicleDetailsViewModel VDVModel)
+        //{
+        //    Vehicle VModel = new Vehicle();
+        //    Owner owner = new Owner() { PNR = VDVModel.PNR };
+        //    VehicleType Vtype = new VehicleType() {TypeId = VDVModel.}
+        //}
     }
 }
